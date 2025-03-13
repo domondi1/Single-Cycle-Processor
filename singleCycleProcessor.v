@@ -1,7 +1,7 @@
 module singleCycleProcessor(input CLOCK_50, input [31:0] ins);
 
-reg [31:0] PC;
-wire [31:0] imm, oprnd1, oprnd2, regDataWrite, aluResult, regData2, PCPlusFour, regDataWriteSrc, PCOffset, immSft;
+reg signed [31:0] PC;
+wire [31:0] nPc, imm, oprnd1, oprnd2, regDataWrite, aluResult, regData2, PCPlusFour, regDataWriteSrc, PCOffset, immSft;
 wire BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, aluZeroFlag;
 wire [2:0] ALUOp;
 
@@ -14,7 +14,8 @@ assign oprnd2 = ALUSrc ? imm : regData2;
 assign regDataWrite = PCToReg ? PCPlusFour : regDataWriteSrc;
 assign PCPlusFour = PC + 32'd4;
 assign immSft = (aluToPC ? aluResult : imm) << 1;
-assign PCOffset = PC + immSft;
+assign PCOffset = PC + immSft[31:0];
+assign nPc = (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0];
 
 initial begin
 	$monitor("%d PC: %d", $time, PC);
@@ -22,7 +23,7 @@ initial begin
 end
 
 always @(posedge CLOCK_50) begin
-	PC <= (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset : PCPlusFour;
+	PC <= nPc[31:0];
 end
 
 endmodule

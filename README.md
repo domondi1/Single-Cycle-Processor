@@ -2,7 +2,8 @@
 Single-cycle RISCV processor
 
 ## TO-DOs
-- [ ] PC update logic needs further debugging
+- [x] PC update logic needs further debugging
+    - add timescale to testbench &rarr; simulation now indicates correct PC update logic 
 - [ ] implement memory datapath
 - [ ] register initialization
 

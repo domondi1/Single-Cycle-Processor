@@ -1,3 +1,5 @@
+`timescale 10ns/1ns
+
 module tb_cu_immgen;
 
 reg [31:0] ins;
@@ -30,8 +32,7 @@ reg [31:0] ins;
 singleCycleProcessor p(clk, ins);
 
 initial begin
-	#0 clk = 0;
-	#1 ins = 32'h00b00533; // add a0, x0, a1
+	#0 clk = 1'b0; ins = 32'h00b00533; // add a0, x0, a1
 	#1 ins = 32'h02000513; // addi a0, x0, 32
 	#1 ins = 32'h0005a503; // lw a0, (0)a1
 	#1 ins = 32'h00a5a023; // sw a0, (0)a1
