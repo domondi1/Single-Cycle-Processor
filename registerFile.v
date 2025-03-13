@@ -1,7 +1,7 @@
 
 
 ////////REGISTER FILE /////////////////////
-module Processor(
+module registerFile(
     input [4:0] rs1, rs2, rd,      // Register addresses
     input [31:0] writeData,        // Data to write
     input regWrite,                // Write enable
@@ -21,9 +21,12 @@ always @(posedge clk) begin
         RF[rd] <= writeData;
 end
 
-// Ensure x0 is always 0
+// Ensure x0 is always 0 // TO-DO: initialize all register
 initial begin
-    RF[0] = 32'b0;
+   RF[0] = 32'd0;
+	RF[10] = 32'd0;
+	RF[11] = 32'd0;
+	RF[1] = 32'd0;
 end
 
 endmodule

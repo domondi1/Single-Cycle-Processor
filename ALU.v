@@ -1,5 +1,5 @@
 ///ALU//////////
-module ALU(
+module alu(
     input [31:0] A, B,         // Operands
     input [2:0] ALUOp,         // Operation selector
     output reg [31:0] result,  // Result
@@ -16,7 +16,8 @@ always @* begin
         3'b101: result = A << B[4:0];  // SLL, SLLI (logical shift left)
         default: result = 32'b0;       // Default case
     endcase
-    zero = (result == 32'b0);          // Set zero flag
+    if(result == 32'b0) zero = 1'b1;	 // Set zero flag
+	 else zero = 1'b0; // prevent zero flag become x
 end
 
 endmodule

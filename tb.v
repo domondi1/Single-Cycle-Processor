@@ -3,7 +3,7 @@ module tb_cu_immgen;
 reg [31:0] ins;
 wire signed [31:0] imm;
 wire BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC;
-wire ALUOp;
+wire [2:0] ALUOp;
 
 controlUnit CU(ins[6:0], ins[14:12], ins[31:25], BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, ALUOp);
 immediateGenerator immGen(ins, imm);
@@ -18,6 +18,31 @@ initial begin
 	#1 ins = 32'h00b50263; // beq a0, a1, 4
 	#1 ins = 32'hfedff0ef; // jal ra, -20
 	#1 ins = 32'h004580e7; // jalr ra, (4)a1
+end
+
+endmodule
+
+module tb_p;
+
+reg clk;
+reg [31:0] ins;
+
+singleCycleProcessor p(clk, ins);
+
+initial begin
+	#0 clk = 0;
+	#1 ins = 32'h00b00533; // add a0, x0, a1
+	#1 ins = 32'h02000513; // addi a0, x0, 32
+	#1 ins = 32'h0005a503; // lw a0, (0)a1
+	#1 ins = 32'h00a5a023; // sw a0, (0)a1
+	#1 ins = 32'h00b50263; // beq a0, a1, 4
+	#1 ins = 32'hfedff0ef; // jal ra, -20
+	#1 ins = 32'h004580e7; // jalr ra, (4)a1
+	#5 $stop;
+end
+
+always @* begin
+	#0.5 clk <= ~clk;
 end
 
 endmodule

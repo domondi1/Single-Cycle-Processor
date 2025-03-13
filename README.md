@@ -1,6 +1,11 @@
 # Single-Cycle-Processor
 Single-cycle RISCV processor
 
+## TO-DOs
+- [ ] PC update logic needs further debugging
+- [ ] implement memory datapath
+- [ ] register initialization
+
 ## ALU Operation Mapping
 
 | ALUOp (Binary) | Operation |
