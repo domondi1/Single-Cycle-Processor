@@ -1,6 +1,14 @@
 # Single-Cycle-Processor
 Single-cycle RISCV processor
 
+## TO-DOs
+- [x] PC update logic needs further debugging
+    - add timescale to testbench &rarr; simulation now indicates correct PC update logic 
+- [ ] implement memory datapath
+- [ ] try RAM as datamemory
+- [ ] test instruction fetch
+- [ ] register initialization
+
 ## ALU Operation Mapping
 
 | ALUOp (Binary) | Operation |
@@ -16,4 +24,4 @@ Single-cycle RISCV processor
 
 ### Control Signals
 - `PCToReg`: When set to 1 (for `JAL` and `JALR`), this signal selects PC+4 to the data write port of the register file. When set to 0, the source of the data write port of the register file is determined by `memToReg`. 
-- `memToPC`: When set to 1 (for `JALR`), this signal selects the jump offset from the ALU. When set to 0 (for `JAL`), the jump offset is the output of immediate generation.
+- `aluToPC`: When set to 1 (for `JALR`), this signal selects the jump offset from the ALU. When set to 0 (for `JAL`), the jump offset is the output of immediate generation.
