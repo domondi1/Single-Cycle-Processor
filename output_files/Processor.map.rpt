@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Processor
-Wed Mar 12 12:56:19 2025
+Fri Mar 14 10:18:32 2025
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
 
 
@@ -44,7 +44,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Mar 12 12:56:19 2025           ;
+; Analysis & Synthesis Status     ; Successful - Fri Mar 14 10:18:32 2025           ;
 ; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Standard Edition ;
 ; Revision Name                   ; Processor                                       ;
 ; Top-level Entity Name           ; Processor                                       ;
@@ -170,13 +170,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                 ;
-+----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                   ; Library ;
-+----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------+---------+
-; registerFile.v                   ; yes             ; User Verilog HDL File  ; C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/registerFile.v ;         ;
-+----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                              ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
+; registerFile.v                   ; yes             ; User Verilog HDL File  ; C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/registerFile.v ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -306,22 +306,33 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
-    Info: Processing started: Wed Mar 12 12:56:09 2025
+    Info: Processing started: Fri Mar 14 10:18:23 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Processor -c Processor
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file registerfile.v
-    Info (12023): Found entity 1: Processor File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/registerFile.v Line: 4
+    Info (12023): Found entity 1: Processor File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/registerFile.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file alu.v
-    Info (12023): Found entity 1: ALU File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/ALU.v Line: 2
+    Info (12023): Found entity 1: ALU File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/ALU.v Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file datamemory.v
-    Info (12023): Found entity 1: dataMemory File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/dataMemory.v Line: 3
+    Info (12023): Found entity 1: dataMemory File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/dataMemory.v Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file instructionmemory.v
-    Info (12023): Found entity 1: instructionMemory File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/instructionMemory.v Line: 1
+    Info (12023): Found entity 1: instructionMemory File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/instructionMemory.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rom.v
+    Info (12023): Found entity 1: ROM File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/ROM.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file datapath.v
+    Info (12023): Found entity 1: datapath File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/datapath.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file immediategenerator.v
+    Info (12023): Found entity 1: immediateGenerator File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/immediateGenerator.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file controlunit.v
+    Info (12023): Found entity 1: controlUnit File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/controlUnit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file instructionfetchunit.v
+    Info (12023): Found entity 1: instructionFetchUnit File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/instructionFetchUnit.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at datapath.v(44): created implicit net for "regDataWriteSrc" File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/datapath.v Line: 44
 Info (12127): Elaborating entity "Processor" for the top level hierarchy
 Info (276014): Found 1 instances of uninferred RAM logic
-    Info (276007): RAM logic "RF" is uninferred due to asynchronous read logic File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/registerFile.v Line: 12
-Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/db/Processor.ram0_Processor_f67faa99.hdl.mif" contains "don't care" values -- overwriting them with 0s
+    Info (276007): RAM logic "RF" is uninferred due to asynchronous read logic File: C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/registerFile.v Line: 12
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/db/Processor.ram0_Processor_f67faa99.hdl.mif" contains "don't care" values -- overwriting them with 0s
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
@@ -329,10 +340,10 @@ Info (21057): Implemented 1712 device resources after synthesis - the final reso
     Info (21058): Implemented 49 input pins
     Info (21059): Implemented 64 output pins
     Info (21061): Implemented 1599 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 4825 megabytes
-    Info: Processing ended: Wed Mar 12 12:56:19 2025
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:14
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4827 megabytes
+    Info: Processing ended: Fri Mar 14 10:18:32 2025
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:15
 
 

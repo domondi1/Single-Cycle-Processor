@@ -1,5 +1,5 @@
 Fitter report for Processor
-Wed Mar 12 12:56:52 2025
+Fri Mar 14 10:19:03 2025
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
 
 
@@ -61,7 +61,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +---------------------------------+-------------------------------------------------+
-; Fitter Status                   ; Successful - Wed Mar 12 12:56:52 2025           ;
+; Fitter Status                   ; Successful - Fri Mar 14 10:19:03 2025           ;
 ; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Standard Edition ;
 ; Revision Name                   ; Processor                                       ;
 ; Top-level Entity Name           ; Processor                                       ;
@@ -157,7 +157,7 @@ https://fpgasoftware.intel.com/eula.
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   4.5%      ;
-;     Processor 3            ;   4.4%      ;
+;     Processor 3            ;   4.5%      ;
 ;     Processor 4            ;   4.4%      ;
 +----------------------------+-------------+
 
@@ -209,7 +209,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/output_files/Processor.pin.
+The pin-out file can be found in C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/output_files/Processor.pin.
 
 
 +---------------------------------------------------------------------------------------------+
@@ -4334,7 +4334,7 @@ Info (332154): The derive_clock_uncertainty command did not apply clock uncertai
 Info (332130): Timing requirements not specified -- quality metrics such as performance may be sacrificed to reduce compilation time.
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (11798): Fitter preparation operations ending: elapsed time is 00:00:05
+Info (11798): Fitter preparation operations ending: elapsed time is 00:00:04
 Info (170189): Fitter placement preparation operations beginning
 Info (14951): The Fitter is using Advanced Physical Optimization.
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:04
@@ -4348,23 +4348,23 @@ Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.58 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.52 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:06
-Info (144001): Generated suppressed messages file C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/output_files/Processor.fit.smsg
+Info (144001): Generated suppressed messages file C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/output_files/Processor.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 6362 megabytes
-    Info: Processing ended: Wed Mar 12 12:56:53 2025
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:54
+    Info: Peak virtual memory: 6356 megabytes
+    Info: Processing ended: Fri Mar 14 10:19:04 2025
+    Info: Elapsed time: 00:00:31
+    Info: Total CPU time (on all processors): 00:00:59
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Users/domondi1/OneDrive - Brown University/Desktop/Processor/output_files/Processor.fit.smsg.
+The suppressed messages can be found in C:/Users/domondi1/OneDrive - Brown University/Desktop/Single-Cycle-Processor/output_files/Processor.fit.smsg.
 
 
