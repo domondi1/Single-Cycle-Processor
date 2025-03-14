@@ -44,7 +44,7 @@
 # *.qar
 *.qarlog
 *.qws
-*.rpt
+# *.rpt
 *.smsg
 *.sof
 *.sopc_builder
@@ -65,5 +65,6 @@
 */*_sim/
 incremental_db/
 db/
-_output_files/
+simulation/
+output_files/
 PLLJ_PLLSPE_INFO.txt
