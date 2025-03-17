@@ -39,6 +39,7 @@ initial begin
 	#1 ins = 32'h00b50263; // beq a0, a1, 4
 	#1 ins = 32'hfedff0ef; // jal ra, -20
 	#1 ins = 32'h004580e7; // jalr ra, (4)a1
+	#1 ins = 32'h00002023; // sw x0, (0)x0
 	#5 $stop;
 end
 
