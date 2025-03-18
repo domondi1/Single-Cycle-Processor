@@ -21,6 +21,14 @@ always @* begin
 			imm[19:0] = {ins[31], ins[19:12], ins[20], ins[30:21]}; // JAL
 			imm[31:20] = {12{ins[31]}};
 		end
+		7'b0100011: begin
+			imm[11:0] = {ins[31:25], ins[11:7]}; // SW
+			imm[31:12] = {20{ins[31]}};
+		end
+		7'b0000011: begin
+			imm[11:0] = ins[31:20]; // LW
+			imm[31:12] = {20{ins[31]}};
+		end
 		default: imm = 32'hxxxxxxxx;
 	endcase
 end
