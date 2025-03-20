@@ -81,6 +81,8 @@ module data(
 );
 
 reg [7:0] addrReg;
+reg wrtReg;
+reg [31:0] dataReg;
 reg [31:0] memory[0:255];  // 1KB memory (256 words, each 32 bits)
 
 initial begin
@@ -89,8 +91,12 @@ end
 
 always @(posedge clock) begin
 	addrReg <= address;
-    if (wren)
-        memory[addrReg] <= data;  // Word-aligned write
+	wrtReg <= wren;
+	dataReg <= data;
+end
+
+always @* begin
+	if(wrtReg) memory[addrReg] = dataReg;
 end
 
 assign q = memory[addrReg];
