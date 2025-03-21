@@ -1,8 +1,31 @@
 module memoryInterface(input CLOCK_50);
 
-wire clk, clkMem, reset, pllLocked;
+wire clk, clkMem, reset;
 wire [31:0] nPc, instruction, aluResult, regData2, memOut;
-wire memWrite;
+wire memWrt;
+
+//reg [7:0] prevAddr, address;
+//reg [31:0] prevData, data;
+//reg prevWrt, wren;
+//
+//always @(posedge clkMem) begin
+//	prevAddr <= address;
+//	prevData <= data;
+//	prevWrt <= wren;
+//end
+//
+//always @* begin
+//	if(instruction[6:0] == 7'b1111111) begin
+//		address = prevAddr;
+//		data = prevData;
+//		wren = prevWrt;
+//	end
+//	else begin
+//		address = aluResult[9:2];
+//		data = regData2;
+//		wren = memWrt;
+//	end
+//end
 
 datapath DP(
 	.clk(clk),
@@ -11,7 +34,7 @@ datapath DP(
 	.nPc(nPc),
 	.aluResult(aluResult),
 	.regData2(regData2),
-	.memWrite(memWrite)
+	.memWrite(memWrt)
 	);
 	
 rom IM(
@@ -24,7 +47,7 @@ ram DM(
 		.address(aluResult[9:2]), // word-aligned
 		.clock(clkMem),
 		.data(regData2),
-		.wren(memWrite),
+		.wren(memWrt),
 		.q(memOut)
 	);	
 
@@ -33,7 +56,6 @@ PLL CLK(
 	.rst(reset),
 	.outclk_0(clk),
 	.outclk_1(clkMem),
-	.locked(pllLocked)
 	);
 
 endmodule

@@ -98,19 +98,15 @@ module datapath(
     assign PCOffset = PC + immSft[31:0]; // PC + offset for branches/jumps
 	 
 	 always @* begin
-		if(ht) begin
-			nPc = PC;
-		end
-		else begin
 			nPc = (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
 		end
-	end
+	
 
     // Update PC
     always @(posedge clk or posedge reset) begin
         if (reset)
             PC <= 32'b0; // Reset PC to 0
-        else
+        else if(!ht)
             PC <= nPc; // Update PC to next instruction
     end
 
