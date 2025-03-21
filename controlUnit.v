@@ -2,7 +2,7 @@ module controlUnit(
 	input [6:0] opcode,
 	input [2:0] func3,
 	input [6:0] func7,
-	output reg BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC,
+	output reg BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt,
 	output reg [2:0] ALUOp
 );
 
@@ -34,28 +34,32 @@ always @* begin
 			endcase
 		end
 		7'b0000011: begin // LW
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b0, 1'b1, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b1, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
 		7'b0100011: begin // SW
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b0, 1'bx, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
 		7'b1100011: begin // B
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b001; // sub
 		end
 		7'b1101111: begin // JAL
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0 };
 			ALUOp = 3'bxxx; // X
 		end
 		7'b1100111: begin // JALR
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b1, 1'bx, 1'b0, 1'b1, 1'b1, 1'b1, 1'b1 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b1, 1'b1, 1'b1, 1'b1, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
+		7'b1111111: begin // halt
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b0, 1'bx, 1'b0, 1'b0, 1'b0, 1'b1 };
+			ALUOp = 3'bxxx; // X
+		end
 		default: begin
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'bx, 1'bx, 1'bx, 1'b0, 1'bx, 1'bx, 1'bx };
-			ALUOp = 3'bxxx;
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'bx, 1'bx, 1'bx, 1'b0, 1'bx, 1'bx, 1'bx, 1'b0 };
+			ALUOp = 3'bxxx; // x
 		end
 	endcase
 end

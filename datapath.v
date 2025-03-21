@@ -2,14 +2,15 @@ module datapath(
     input clk,              // System clock
 	 input [31:0] instruction, memOut,
     //input reset,             // Reset signal
-	 output [31:0] nPc, regData2, aluResult,
+	 output [31:0] regData2, aluResult,
+	 output reg [31:0] nPc,
 	 output memWrite
 	);
 
     // Internal signals
     //wire [31:0] instruction; // Current instruction
     wire [31:0] oprnd1, oprnd2, regDataWrite, regDataWriteSrc, PCPlusFour, imm, immSft, PCOffset;
-    wire BR, memToReg, ALUSrc, regWrite, PCToReg, aluToPC, aluZeroFlag;
+    wire BR, memToReg, ALUSrc, regWrite, PCToReg, aluToPC, aluZeroFlag, ht;
     wire [2:0] ALUOp;
 	 reg [31:0] PC;
 	 wire reset;
@@ -79,7 +80,8 @@ module datapath(
         .regWrite(regWrite),
         .PCToReg(PCToReg),
         .aluToPC(aluToPC),
-        .ALUOp(ALUOp)
+        .ALUOp(ALUOp),
+		  .halt(ht)
     );
 
     immediateGenerator immGen(
@@ -94,7 +96,15 @@ module datapath(
     assign PCPlusFour = PC + 32'd4; // PC + 4
     assign immSft = (aluToPC ? aluResult : imm) << 1; // Shift immediate for branches/jumps
     assign PCOffset = PC + immSft[31:0]; // PC + offset for branches/jumps
-    assign nPc = (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
+	 
+	 always @* begin
+		if(ht) begin
+			nPc = PC;
+		end
+		else begin
+			nPc = (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
+		end
+	end
 
     // Update PC
     always @(posedge clk or posedge reset) begin
