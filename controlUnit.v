@@ -9,7 +9,7 @@ module controlUnit(
 always @* begin
 	case(opcode)
 		7'b0110011: begin // R
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0 };
 			// check func7&func3
 			if(func3 == 3'b000) begin
 				case(func7)
@@ -25,7 +25,7 @@ always @* begin
 			else ALUOp = 3'bxxx;
 		end
 		7'b0010011: begin // I
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC} = { 1'b0, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0 };
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0 };
 			// check func3
 			case(func3)
 				3'b000: ALUOp = 3'b000; // ADDI
@@ -54,8 +54,8 @@ always @* begin
 			ALUOp = 3'b000; // add
 		end
 		7'b1111111: begin // halt
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b0, 1'bx, 1'b0, 1'b0, 1'b0, 1'b1 };
-			ALUOp = 3'bxxx; // X
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1 };
+			ALUOp = 3'bxxx; // add
 		end
 		default: begin
 			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'bx, 1'bx, 1'bx, 1'b0, 1'bx, 1'bx, 1'bx, 1'b0 };

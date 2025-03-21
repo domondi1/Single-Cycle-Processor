@@ -96,9 +96,10 @@ module datapath(
     assign PCPlusFour = PC + 32'd4; // PC + 4
     assign immSft = (aluToPC ? aluResult : imm) << 1; // Shift immediate for branches/jumps
     assign PCOffset = PC + immSft[31:0]; // PC + offset for branches/jumps
+	 assign brOnZero = instruction[14:12] == 3'b001 ? ~aluZeroFlag : aluZeroFlag;
 	 
 	 always @* begin
-			nPc = (BR && aluZeroFlag) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
+			nPc = (BR && brOnZero) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
 		end
 	
 
@@ -108,6 +109,7 @@ module datapath(
             PC <= 32'b0; // Reset PC to 0
         else if(!ht)
             PC <= nPc; // Update PC to next instruction
+			else  PC <= PC;
     end
 
 endmodule
