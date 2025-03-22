@@ -70,3 +70,8 @@ output_files/
 PLLJ_PLLSPE_INFO.txt
 
 *.json
+*.qar
+
+PLL_sim/cadence/ncsim_setup.sh
+PLL_sim/synopsys/vcs/vcs_setup.sh
+PLL_sim/synopsys/vcsmx/vcsmx_setup.sh

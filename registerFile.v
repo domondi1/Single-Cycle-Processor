@@ -15,8 +15,8 @@ reg [31:0] RF[0:31];  // 32 registers, each 32 bits wide
 assign readData1 = RF[rs1];
 assign readData2 = RF[rs2];
 
-// Write logic
-always @(posedge clk) begin
+// Write logic. Sequential on negative clk edge
+always @(posedge ~clk) begin
     if (regWrite && rd != 5'b0)  // Prevent writing to x0 (always 0)
         RF[rd] <= writeData;
 end

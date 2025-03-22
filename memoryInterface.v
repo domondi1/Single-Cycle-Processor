@@ -3,12 +3,13 @@ module memoryInterface(input CLOCK_50);
 wire clk, clkMem, reset;
 wire [31:0] nPc, instruction, aluResult, regData2, memOut;
 wire memWrt, ht;
-reg [5:0] PC;
 
-always @* begin
-	if(!ht)
-		PC <= nPc[7:2];
-end
+//reg [5:0] PC;
+//
+//always @* begin
+//	if(~ht)
+//		PC = nPc[7:2];
+//end
 
 //wire [5:0] PC;
 //reg [5:0] prevNPC;
@@ -53,8 +54,9 @@ datapath DP(
 	.ht(ht)
 	);
 	
-rom IM(
-		.address(PC), // word-aligned
+fakeRom IM(
+		.address(nPc[7:2]), // word-aligned
+		.ht(ht),
 		.clock(clk),
 		.q(instruction)
 	);
@@ -73,5 +75,64 @@ PLL CLK(
 	.outclk_0(clk),
 	.outclk_1(clkMem)
 	);
+
+endmodule
+
+module fakeRom(
+	input [5:0] address, // shadow PC
+	input ht,
+	input clock,
+	output [31:0] q
+);
+
+reg [5:0] addrReg;
+reg [31:0] ins [0:19];
+
+initial begin
+	$monitor("instruction q: %h %b", q, q);
+	addrReg = 6'd0;
+	// Test program 2
+//	ins[0] = 32'h00800293;
+//	ins[1] = 32'h00800293;
+//	ins[2] = 32'h00F00313; 
+//	ins[3] = 32'h0062A023; 
+//	ins[4] = 32'h005303B3; 
+//	ins[5] = 32'h40530E33; 
+//	ins[6] = 32'h03C384B3; 
+//	ins[7] = 32'h00428293; 
+//	ins[8] = 32'hFFC2A903; 
+//	ins[9] = 32'h41248933; 
+//	ins[10] = 32'h00291913;
+//	ins[11] = 32'h0122A023;
+//	ins[12] = 32'h0000007F;
+//	// Test program 3
+	ins[0] = 32'h00600513;
+	ins[1] = 32'h00600513;
+	ins[2] = 32'h00C000EF;
+	ins[3] = 32'h00A02023;
+	ins[4] = 32'h0000007F;
+	ins[5] = 32'hFF810113;
+	ins[6] = 32'h00112223;
+	ins[7] = 32'h00A12023;
+	ins[8] = 32'h00100293;
+	ins[9] = 32'h00551863;
+	ins[10] = 32'h00100513;
+	ins[11] = 32'h00810113;
+	ins[12] = 32'h00008067;
+	ins[13] = 32'hFFF50513;
+	ins[14] = 32'hFDDFF0EF;
+	ins[15] = 32'h00012303;
+	ins[16] = 32'h00412083;
+	ins[17] = 32'h00810113;
+	ins[18] = 32'h02650533;
+	ins[19] = 32'h00008067;
+end
+
+always @(posedge clock) begin
+	if(!ht)
+		addrReg <= address;
+end
+
+assign q = ins[addrReg];
 
 endmodule

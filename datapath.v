@@ -15,8 +15,8 @@ module datapath(
 	 reg [31:0] PC;
 	 wire reset;
 	 
-	 initial begin
-		PC = 0;
+	initial begin
+		PC = 32'd0;
 	end
 
     // Instantiate modules
@@ -100,23 +100,26 @@ module datapath(
 	 
 	 always @* begin
 			//nPc = (BR && brOnZero) || (BR && PCToReg) ? PCOffset[31:0] : (aluToPC) ? aluResult : PCPlusFour[31:0]; // Next PC logic
-			if((BR && brOnZero) || (BR && PCToReg)) begin
-				if(aluToPC) 
-					nPc = aluResult;
-				else 
-					nPc = PCOffset[31:0];
-			end else
-				nPc = PCPlusFour[31:0];
+			//if(~ht) begin
+				if((BR && brOnZero) || (BR && PCToReg)) begin
+					if(aluToPC) 
+						nPc = aluResult;
+					else 
+						nPc = PCOffset[31:0];
+				end else
+					nPc = PCPlusFour[31:0];
+//			end else begin
+//				nPc = PC;
+//			end
 		end
 	
 
     // Update PC
-    always @(posedge clk or posedge reset) begin
-        if (reset)
-            PC <= 32'b0; // Reset PC to 0
-        else if(!ht)
+    always @(posedge clk) begin
+			//PC <= nPc;
+        if(!ht)
             PC <= nPc; // Update PC to next instruction
-			else  PC <= PC;
+			//else  PC <= PC;
     end
 
 endmodule

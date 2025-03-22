@@ -6,9 +6,13 @@ module controlUnit(
 	output reg [2:0] ALUOp
 );
 
+initial begin
+	halt = 0;
+end
+
 always @* begin
-	case(opcode)
-		7'b0110011: begin // R
+	//case(opcode)
+		if(opcode == 7'b0110011) begin // R
 			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0 };
 			// check func7&func3
 			if(func3 == 3'b000) begin
@@ -24,7 +28,7 @@ always @* begin
 			else if(func3 == 3'b001) ALUOp = 3'b101; // SLL
 			else ALUOp = 3'bxxx;
 		end
-		7'b0010011: begin // I
+		else if(opcode == 7'b0010011) begin // I
 			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0 };
 			// check func3
 			case(func3)
@@ -33,35 +37,35 @@ always @* begin
 				default: ALUOp = 3'bxxx;
 			endcase
 		end
-		7'b0000011: begin // LW
+		else if(opcode == 7'b0000011) begin // LW
 			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b1, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
-		7'b0100011: begin // SW
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0 };
+		else if(opcode == 7'b0100011) begin // SW
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
-		7'b1100011: begin // B
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0 };
+		else if(opcode == 7'b1100011) begin // B
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0 };
 			ALUOp = 3'b001; // sub
 		end
-		7'b1101111: begin // JAL
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0 };
+		else if(opcode == 7'b1101111) begin // JAL
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'b0, 1'b0, 1'b0, 1'b1, 1'b1, 1'b0, 1'b0 };
 			ALUOp = 3'bxxx; // X
 		end
-		7'b1100111: begin // JALR
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'bx, 1'b0, 1'b1, 1'b1, 1'b1, 1'b1, 1'b0 };
+		else if(opcode == 7'b1100111) begin // JALR
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b1, 1'b0, 1'b0, 1'b1, 1'b1, 1'b1, 1'b1, 1'b0 };
 			ALUOp = 3'b000; // add
 		end
-		7'b1111111: begin // halt
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'bx, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1 };
-			ALUOp = 3'bxxx; // add
-		end
-		default: begin
-			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'bx, 1'bx, 1'bx, 1'b0, 1'bx, 1'bx, 1'bx, 1'b0 };
+		else if(opcode == 7'b1111111) begin // halt
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b1 };
 			ALUOp = 3'bxxx; // x
 		end
-	endcase
+		else begin
+			{BR, memToReg, memWrite, ALUSrc, regWrite, PCToReg, aluToPC, halt} = { 1'bx, 1'b0, 1'bx, 1'b0, 1'bx, 1'bx, 1'bx, 1'b0 };
+			ALUOp = 3'bxxx; // x
+		end
+	//endcase
 end
 
 endmodule
