@@ -4,13 +4,13 @@ module datapath(
     //input reset,             // Reset signal
 	 output [31:0] regData2, aluResult,
 	 output reg [31:0] nPc,
-	 output memWrite
+	 output memWrite, ht
 	);
 
     // Internal signals
     //wire [31:0] instruction; // Current instruction
     wire [31:0] oprnd1, oprnd2, regDataWrite, regDataWriteSrc, PCPlusFour, imm, immSft, PCOffset;
-    wire BR, memToReg, ALUSrc, regWrite, PCToReg, aluToPC, aluZeroFlag, ht;
+    wire BR, memToReg, ALUSrc, regWrite, PCToReg, aluToPC, aluZeroFlag;
     wire [2:0] ALUOp;
 	 reg [31:0] PC;
 	 wire reset;
