@@ -1,5 +1,5 @@
 Restore Archived Project report for Processor
-Sat Mar 22 11:04:39 2025
+Sat Mar 22 18:14:39 2025
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Standard Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------+
 ; Restore Archived Project Summary                                        ;
 +---------------------------------+---------------------------------------+
-; Restore Archived Project Status ; Successful - Sat Mar 22 11:04:39 2025 ;
+; Restore Archived Project Status ; Successful - Sat Mar 22 18:14:39 2025 ;
 ; Revision Name                   ; Processor                             ;
 ; Top-level Entity Name           ; memoryInterface                       ;
 ; Family                          ; Cyclone V                             ;
@@ -47,14 +47,14 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------+
 ; Restore Archived Project Messages ;
 +-----------------------------------+
-Info: Successfully restored 'C:/Users/pcheng11/Downloads/Processor.qar' into the 'C:\\Users\\pcheng11\\Downloads\\scp/' directory
+Info: Successfully restored 'C:/Users/pcheng11/Downloads/Processor.qar' into the 'C:\\Users\\pcheng11\\Downloads\\sc/' directory
 Info: Generated report 'Processor.restore.rpt'
 Info (23030): Evaluation of Tcl script c:/intelfpga/20.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 4854 megabytes
-    Info: Processing ended: Sat Mar 22 11:04:39 2025
+    Info: Processing ended: Sat Mar 22 18:14:39 2025
     Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
 
 
 +-------------------------+
