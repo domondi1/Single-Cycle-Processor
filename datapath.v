@@ -94,12 +94,19 @@ module datapath(
 	 //assign regDataWriteScr = memToReg ? memOut : aluResult;
     assign regDataWrite = PCToReg ? PCPlusFour : (memToReg ? memOut : aluResult); // Mux for register write data
     assign PCPlusFour = PC + 32'd4; // PC + 4
-    assign immSft = (aluToPC ? aluResult : imm) << 1; // Shift immediate for branches/jumps
+    assign immSft = imm << 1; // Shift immediate for branches/jumps
     assign PCOffset = PC + immSft[31:0]; // PC + offset for branches/jumps
 	 assign brOnZero = instruction[14:12] == 3'b001 ? ~aluZeroFlag : aluZeroFlag;
 	 
 	 always @* begin
-			nPc = (BR && brOnZero) || (BR && PCToReg) ? PCOffset[31:0] : PCPlusFour[31:0]; // Next PC logic
+			//nPc = (BR && brOnZero) || (BR && PCToReg) ? PCOffset[31:0] : (aluToPC) ? aluResult : PCPlusFour[31:0]; // Next PC logic
+			if((BR && brOnZero) || (BR && PCToReg)) begin
+				if(aluToPC) 
+					nPc = aluResult;
+				else 
+					nPc = PCOffset[31:0];
+			end else
+				nPc = PCPlusFour[31:0];
 		end
 	
 
